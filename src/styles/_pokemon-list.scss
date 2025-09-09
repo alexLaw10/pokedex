@@ -1,0 +1,211 @@
+@import 'variables';
+@import 'mixins';
+
+// Lista lateral de Pokémon
+.pokemon-list {
+  width: 280px;
+  background: $bg-white;
+  border: 1px solid $border;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  
+  .pokemon-list-header {
+    background: $bg-light;
+    padding: 15px 20px;
+    border-bottom: 1px solid $border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    .pokemon-count {
+      background: $primary;
+      color: $text-white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+  
+  .pokemon-list-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    
+    // Scrollbar customizada
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $bg-light;
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $border-dark;
+      border-radius: 3px;
+      
+      &:hover {
+        background: $secondary;
+      }
+    }
+  }
+  
+  .pokemon-list-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    
+    &:hover {
+      background: $bg-light;
+      border-color: $border;
+      transform: translateX(2px);
+    }
+    
+    &.selected {
+      background: $primary;
+      color: $text-white;
+      border-color: $primary;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+      
+      .pokemon-number {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+    
+    .pokemon-number {
+      font-size: 12px;
+      font-weight: 600;
+      color: $text-muted;
+      margin-right: 12px;
+      min-width: 40px;
+    }
+    
+    .pokemon-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: $text-dark;
+      flex: 1;
+      text-transform: capitalize;
+    }
+  }
+  
+  .pokemon-list-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: $text-muted;
+    font-size: 14px;
+    
+    .loading-spinner {
+      margin-right: 10px;
+      
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid $bg-light;
+        border-top: 2px solid $primary;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+  
+  .load-more-btn {
+    width: 100%;
+    padding: 12px;
+    background: $bg-light;
+    border: 1px solid $border;
+    border-radius: 6px;
+    color: $text-dark;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    
+    &:hover {
+      background: $primary;
+      color: $text-white;
+      border-color: $primary;
+    }
+  }
+  
+  .pokemon-list-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    
+    .error-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: $danger;
+    }
+    
+    p {
+      margin: 0;
+      color: $text-muted;
+      font-size: 14px;
+    }
+  }
+}
+
+// Layout com lista lateral
+.pokedex-with-list {
+  display: flex;
+  gap: 20px;
+  height: 100vh;
+  max-height: 100vh;
+  
+  .pokemon-list-container {
+    flex-shrink: 0;
+  }
+  
+  .pokedex-main {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+// Responsividade
+@include responsive(mobile) {
+  .pokedex-with-list {
+    flex-direction: column;
+    height: auto;
+    max-height: none;
+    
+    .pokemon-list-container {
+      order: 2;
+      width: 100%;
+      
+      .pokemon-list {
+        width: 100%;
+        height: 300px;
+      }
+    }
+    
+    .pokedex-main {
+      order: 1;
+    }
+  }
+}

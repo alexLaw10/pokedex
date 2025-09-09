@@ -3,7 +3,6 @@
 
 // Container principal simples
 .pokedex-container {
-  @include flex-center;
   min-height: 100vh;
   background: linear-gradient(135deg, $bg-light 0%, #e9ecef 100%);
   padding: 10px;
@@ -13,7 +12,6 @@
 // Container do dispositivo
 .pokedex-device {
   width: 100%;
-  max-width: 900px;
   background: $bg-white;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);

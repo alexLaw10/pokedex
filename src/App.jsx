@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import PokemonSearch from './components/PokemonSearch'
 import PokemonElegant from './components/PokemonElegant'
+import PokemonList from './components/PokemonList'
 import { usePokemonSearch } from './hooks/usePokemonSearch'
 import './styles/main.scss'
 
@@ -29,9 +30,25 @@ function App() {
     setCurrentView('search')
   }
 
+  const handlePokemonSelect = (pokemonName) => {
+    searchPokemon(pokemonName)
+    setCurrentView('pokemon')
+  }
+
   return (
     <div className="pokedex-container">
-      <div className="pokedex-device">
+      <div className="pokedex-with-list">
+        {/* Lista lateral de Pokémon */}
+        <div className="pokemon-list-container">
+          <PokemonList 
+            onPokemonSelect={handlePokemonSelect}
+            selectedPokemonId={pokemon?.id}
+          />
+        </div>
+
+        {/* Pokédex principal */}
+        <div className="pokedex-main">
+          <div className="pokedex-device">
         
         {/* Header */}
         <div className="pokedex-header">
@@ -79,7 +96,8 @@ function App() {
             </div>
           )}
         </div>
-
+          </div>
+        </div>
       </div>
     </div>
   )
