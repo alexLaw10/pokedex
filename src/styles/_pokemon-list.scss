@@ -1,7 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-// Lista lateral de Pokémon
 .pokemon-list {
   width: 280px;
   background: $bg-white;
@@ -47,8 +46,7 @@
     flex: 1;
     overflow-y: auto;
     padding: 10px;
-    
-    // Scrollbar customizada
+
     &::-webkit-scrollbar {
       width: 6px;
     }
@@ -176,7 +174,6 @@
   }
 }
 
-// Filtro de região
 .region-filter {
   .region-filter-header {
     display: flex;
@@ -283,7 +280,6 @@
   }
 }
 
-// Layout com lista lateral
 .pokedex-with-list {
   display: flex;
   gap: 20px;
@@ -300,7 +296,6 @@
   }
 }
 
-// Responsividade
 @include responsive(mobile) {
   .pokedex-with-list {
     flex-direction: column;

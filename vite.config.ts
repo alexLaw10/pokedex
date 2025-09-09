@@ -8,6 +8,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@shared': path.resolve(__dirname, './src/shared'),
+      '@features': path.resolve(__dirname, './src/features'),
+      '@pokemon': path.resolve(__dirname, './src/features/pokemon'),
+      '@evolution': path.resolve(__dirname, './src/features/evolution'),
     },
   },
   server: {
@@ -17,5 +21,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          shared: ['@shared'],
+          pokemon: ['@pokemon'],
+          evolution: ['@evolution'],
+        },
+      },
+    },
   },
 });

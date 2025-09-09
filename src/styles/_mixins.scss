@@ -1,4 +1,5 @@
-// Mixins para o Pokédex
+
+@use "sass:color";
 
 @mixin flex-center {
   display: flex;
@@ -8,7 +9,7 @@
 
 @mixin button-style($bg-color, $hover-color) {
   background: $bg-color;
-  border: 2px solid darken($bg-color, 10%);
+  border: 2px solid color.adjust($bg-color, $lightness: -10%);
   border-radius: 8px;
   color: white;
   font-weight: bold;

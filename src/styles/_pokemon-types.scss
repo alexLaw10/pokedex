@@ -1,4 +1,4 @@
-// Cores dos tipos de Pokémon
+
 $type-colors: (
   normal: #a8a878,
   fire: #f08030,
@@ -20,7 +20,6 @@ $type-colors: (
   fairy: #ee99ac
 );
 
-// Mixin para cores de tipo
 @mixin type-color($type) {
   $color: map-get($type-colors, $type);
   @if $color {
@@ -33,7 +32,6 @@ $type-colors: (
   }
 }
 
-// Classes para cada tipo
 @each $type, $color in $type-colors {
   .type-#{$type} {
     @include type-color($type);

@@ -1,15 +1,13 @@
 import { useState, useCallback } from 'react';
-import PokemonSearch from '@/components/PokemonSearch';
-import PokemonElegant from '@/components/PokemonElegant';
-import PokemonList from '@/components/PokemonList';
-import PokemonEvolutionSidebar from '@/components/PokemonEvolutionSidebar';
-import { usePokemonSearch } from '@/hooks/usePokemonSearch';
-import '@/styles/main.scss';
+import { 
+  PokemonSearch, 
+  PokemonElegant, 
+  PokemonList, 
+  PokemonEvolutionSidebar 
+} from '@pokemon/components';
+import { usePokemonSearch } from '@pokemon/hooks';
+import './styles/main.scss';
 
-/**
- * Componente principal da aplicação Pokédex
- * Gerencia navegação entre busca e visualização de Pokémon
- */
 function App(): JSX.Element {
   const [currentView, setCurrentView] = useState<'search' | 'pokemon'>('search');
   const { 
@@ -20,63 +18,47 @@ function App(): JSX.Element {
     clearSearch 
   } = usePokemonSearch();
 
-  /**
-   * Manipula busca de Pokémon
-   */
   const handleSearch = useCallback((searchTerm: string): void => {
     searchPokemon(searchTerm);
     setCurrentView('pokemon');
   }, [searchPokemon]);
 
-  /**
-   * Manipula limpeza da busca
-   */
   const handleClearSearch = useCallback((): void => {
     clearSearch();
     setCurrentView('search');
   }, [clearSearch]);
 
-  /**
-   * Manipula retorno à busca
-   */
   const handleBackToSearch = useCallback((): void => {
     setCurrentView('search');
   }, []);
 
-  /**
-   * Manipula seleção de Pokémon da lista
-   */
   const handlePokemonSelect = useCallback((pokemonName: string): void => {
     searchPokemon(pokemonName);
     setCurrentView('pokemon');
   }, [searchPokemon]);
 
   return (
-    <div className="pokedex-container">
+    <div className="pokedex-container" role="main" aria-label="Aplicação Pokédex">
       <div className="pokedex-with-list">
-        {/* Lista lateral de Pokémon */}
-        <div className="pokemon-list-container">
+        <aside className="pokemon-list-container" role="complementary" aria-label="Lista de Pokémon">
           <PokemonList 
             onPokemonSelect={handlePokemonSelect}
             selectedPokemonId={pokemon?.id}
           />
-        </div>
+        </aside>
 
-        {/* Pokédex principal */}
-        <div className="pokedex-main">
+        <main id="main-content" className="pokedex-main" role="main">
           <div className="pokedex-device">
-            {/* Header */}
-            <div className="pokedex-header">
+            <header className="pokedex-header">
               <h1>Pokédex</h1>
               <p>Busque informações sobre qualquer Pokémon</p>
-            </div>
+            </header>
 
-            {/* Conteúdo */}
             <div className="pokedex-content">
               {currentView === 'search' && (
-                <div className="search-section">
+                <section className="search-section" aria-labelledby="search-title">
                   <div className="search-title">
-                    <h2>Buscar Pokémon</h2>
+                    <h2 id="search-title">Buscar Pokémon</h2>
                     <p>Digite o ID ou nome do Pokémon</p>
                   </div>
                   
@@ -84,17 +66,18 @@ function App(): JSX.Element {
                     onSearch={handleSearch}
                     loading={loading}
                   />
-                </div>
+                </section>
               )}
               
               {currentView === 'pokemon' && (
-                <div className="pokemon-section">
-                  <div className="pokemon-controls">
+                <section className="pokemon-section" aria-labelledby="pokemon-details">
+                  <div className="pokemon-controls" role="toolbar" aria-label="Controles do Pokémon">
                     <button 
                       type="button"
                       onClick={handleBackToSearch}
                       className="btn btn-secondary"
                       aria-label="Voltar para busca"
+                      title="Voltar para a tela de busca"
                     >
                       ← Voltar
                     </button>
@@ -103,13 +86,14 @@ function App(): JSX.Element {
                       onClick={handleClearSearch}
                       className="btn btn-danger"
                       aria-label="Limpar busca"
+                      title="Limpar busca atual"
                     >
                       ✕ Limpar
                     </button>
                   </div>
                   
                   <div className="pokemon-details-container">
-                    <div className="pokemon-main-info">
+                    <div className="pokemon-main-info" role="region" aria-label="Informações principais do Pokémon">
                       <PokemonElegant
                         pokemon={pokemon}
                         error={error}
@@ -117,15 +101,15 @@ function App(): JSX.Element {
                       />
                     </div>
                     
-                    <div className="pokemon-evolution-sidebar">
+                    <aside className="pokemon-evolution-sidebar" role="complementary" aria-label="Informações de evolução">
                       <PokemonEvolutionSidebar pokemon={pokemon} />
-                    </div>
+                    </aside>
                   </div>
-                </div>
+                </section>
               )}
             </div>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
