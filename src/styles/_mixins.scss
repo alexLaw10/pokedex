@@ -1,0 +1,80 @@
+// Mixins para o Pokédex
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-style($bg-color, $hover-color) {
+  background: $bg-color;
+  border: 2px solid darken($bg-color, 10%);
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all $transition-fast;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  
+  &:hover:not(:disabled) {
+    background: $hover-color;
+    transform: translateY(-2px);
+    box-shadow: $shadow-medium;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin screen-glow {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.3),
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+@mixin pokemon-card {
+  background: rgba(0, 255, 0, 0.05);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px 0;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: rgba(0, 255, 0, 0.5);
+    transform: translateY(-2px);
+  }
+}
+
+@mixin type-badge($color) {
+  background: $color;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 2px;
+  display: inline-block;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  }
+}

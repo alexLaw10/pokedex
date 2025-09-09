@@ -1,0 +1,73 @@
+// Cores simples
+$primary: #007bff;
+$primary-dark: #0056b3;
+$secondary: #6c757d;
+$success: #28a745;
+$danger: #dc3545;
+$warning: #ffc107;
+$info: #17a2b8;
+
+// Cores de fundo
+$bg-white: #ffffff;
+$bg-light: #f8f9fa;
+$bg-dark: #343a40;
+$bg-tertiary: #f1f5f9;
+
+// Cores de texto
+$text-dark: #212529;
+$text-muted: #6c757d;
+$text-white: #ffffff;
+
+// Cores de borda
+$border: #dee2e6;
+$border-dark: #adb5bd;
+
+// Cores do dispositivo
+$device-red: #dc2626;
+$device-black: #1f2937;
+$device-silver: #d1d5db;
+$device-grey: #6b7280;
+
+// Cores da tela
+$screen-bg: #f8fafc;
+$screen-bg-dark: #1e293b;
+$screen-text: #1f2937;
+$screen-text-light: #6b7280;
+$screen-border: #d1d5db;
+
+// Cores dos controles
+$control-black: #1f2937;
+$control-grey: #6b7280;
+$control-silver: #d1d5db;
+$control-green: #10b981;
+
+// Cores dos botões
+$button-primary: #10b981;
+$button-secondary: #dc2626;
+$button-accent: #3b82f6;
+
+// Gradientes
+$gradient-bg: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+$gradient-device: linear-gradient(145deg, $device-red, #b91c1c);
+
+// Dimensões (clamshell)
+$pokedex-width: 320px;
+$pokedex-height: 480px;
+$screen-width: 200px;
+$screen-height: 150px;
+$screen-gap: 20px;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+
+// Animações
+$transition-fast: 0.2s;
+$transition-normal: 0.3s;
+$transition-slow: 0.5s;
+
+// Sombras
+$shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+$shadow-medium: 0 4px 8px rgba(0,0,0,0.2);
+$shadow-heavy: 0 8px 16px rgba(0,0,0,0.3);
+$shadow-glow: 0 0 10px rgba(0,255,0,0.5);

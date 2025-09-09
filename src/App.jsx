@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import PokemonList from './components/PokemonList'
 import PokemonSearch from './components/PokemonSearch'
-import PokemonDetails from './components/PokemonDetails'
+import PokemonElegant from './components/PokemonElegant'
 import { usePokemonSearch } from './hooks/usePokemonSearch'
+import './styles/main.scss'
 
 function App() {
-  const [currentView, setCurrentView] = useState('list') // 'list' ou 'search'
+  const [currentView, setCurrentView] = useState('search') // 'search' ou 'pokemon'
   const { 
     pokemon, 
     loading, 
@@ -17,55 +17,70 @@ function App() {
 
   const handleSearch = (searchTerm) => {
     searchPokemon(searchTerm)
-    setCurrentView('search')
+    setCurrentView('pokemon')
   }
 
   const handleClearSearch = () => {
     clearSearch()
-    setCurrentView('list')
+    setCurrentView('search')
+  }
+
+  const handleBackToSearch = () => {
+    setCurrentView('search')
   }
 
   return (
-    <div>
-      <header>
-        <h1>Pokédex</h1>
-        <p>Explore o mundo dos Pokémon!</p>
+    <div className="pokedex-container">
+      <div className="pokedex-device">
         
-        <nav>
-          <button 
-            onClick={() => setCurrentView('list')}
-            disabled={currentView === 'list'}
-          >
-            Lista de Pokémon
-          </button>
-          <button 
-            onClick={() => setCurrentView('search')}
-            disabled={currentView === 'search'}
-          >
-            Buscar Pokémon
-          </button>
-        </nav>
-      </header>
-      
-      <main>
-        {currentView === 'list' && <PokemonList />}
-        
-        {currentView === 'search' && (
-          <div>
-            <PokemonSearch 
-              onSearch={handleSearch}
-              loading={loading}
-            />
-            
-            <PokemonDetails
-              pokemon={pokemon}
-              error={error}
-              notFound={notFound}
-              onClear={handleClearSearch}
-            />
-          </div>
-        )}
-      </main>
+        {/* Header */}
+        <div className="pokedex-header">
+          <h1>Pokédex</h1>
+          <p>Busque informações sobre qualquer Pokémon</p>
+        </div>
+
+        {/* Conteúdo */}
+        <div className="pokedex-content">
+          {currentView === 'search' && (
+            <div className="search-section">
+              <div className="search-title">
+                <h2>Buscar Pokémon</h2>
+                <p>Digite o ID ou nome do Pokémon</p>
+              </div>
+              
+              <PokemonSearch 
+                onSearch={handleSearch}
+                loading={loading}
+              />
+            </div>
+          )}
+          
+          {currentView === 'pokemon' && (
+            <div className="pokemon-section">
+              <div className="pokemon-controls">
+                <button 
+                  onClick={handleBackToSearch}
+                  className="btn btn-secondary"
+                >
+                  ← Voltar
+                </button>
+                <button 
+                  onClick={handleClearSearch}
+                  className="btn btn-danger"
+                >
+                  ✕ Limpar
+                </button>
+              </div>
+              <PokemonElegant
+                pokemon={pokemon}
+                error={error}
+                loading={loading}
+              />
+            </div>
+          )}
+        </div>
+
+      </div>
     </div>
   )
 }
